@@ -1,0 +1,153 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+while (True):
+company = pd.read_csv("company data analysis.csv")
+print("Main Menu")
+print("1. Fetch Data")
+print("2. Dataframe Statistics")
+print("3. Display Records")
+print("4. Working on Records")
+print("5. Working on column")
+print("6. Search Specific row/column")
+print("7. Data Visualization")
+print("Exit")
+ch = int(input("Enter your choice"))
+if ch==1:
+print("company")
+elif ch==2:
+while(True):
+print("Dataframe Statistics Menu")
+print("1. Display the Transposer")
+print("2. Display all Columns name ")
+print("3. Display the index")
+print("4. Display the shape")
+print("5. Display the Dimesnion")
+print("6. Display the daya type of all columns")
+print("7. Display the size")
+print("8. Exit")
+ch2 = int(input("Enter choice"))
+if ch2==1:
+print(company.T)
+elif ch2==2:
+print(company.columns)
+elif ch2==3:
+print(company.index)
+elif ch2==4:
+print(company.shape)
+elif ch2==5:
+print(company.ndim)
+elif ch2==6:
+print(company.dtypes)
+elif ch2==7:
+print(company.size)
+elif ch2==8:
+break
+elif ch==3:
+while(True): print("Display Records Menu")
+print("1. Display Top 5 Records")
+print("2. Display Bottom 5 Records ")
+print("3. Display Specific number of records from the top")
+print("4. Display Specific number of records from the bottom")
+print("5. Display details of a specific product")
+print("6. Exit")
+ch3 = int(input("Enter choice"))
+if ch3==1:
+print(company.head())
+elif ch3==2:
+print(company.tail())
+elif ch3==3:
+n=int(input("Enter how many records you want to see from the top?"))
+print(company.head(n))
+elif ch3==4:
+n1 =int(input("Enter how many records you want to see from the bottom?"))
+print(company.tail(n1))
+elif ch3==5:
+st=int(input("Enter how many records you want to see the details for?"))
+print(company.loc[st])
+elif ch3==6:
+break
+elif ch==4:
+while(True): print("Working on Records Menu")
+print("1. Insert a specific name of Record")
+print("2. Delete a specific name of Record")
+print("3. Update a specific name of Record")
+print("4. Exit")
+ch4 = int(input("Enter choice"))
+if ch4==1:
+i=len(company)
+cntry=input("Entre the PRONO.")
+i=input("Enter the PRONAME")
+ii=input("Enter the ORIGIN")
+iii=input("Enter the STOCK")
+iv=input("Enter the PRICE")
+v= (i+ii+iii+iv)
+company.loc[cntry]=[i,ii,iii,iv,v]
+company.to_csv("company data analysis")
+print("A new record is successfully inserted\n\n")
+elif ch4==2:
+a=int(input("Enter the name of the product which is to be deleted"))
+df = pd.read_csv("company data analysis",index_col=0)
+df = df.drop([a],axis=0)
+print("Data Successfully Deleted")
+elif ch4==3:
+a = input("Enter the PRONO.")
+b = input("Enter the PRONAME")
+c = input("Enter the ORIGIN")
+d = input("Enter the STOCK")
+e = input("Enter the PRICE")
+f = (a+b+c+d+e)
+company.loc[a]=[b,c,d,e,f]
+print("Data Successfully Updated")
+elif ch4==4:
+break
+elif ch==5:
+while(True): print("Working on Columns Menu")
+print("1. Insert a new column Data")
+print("2. Delete a specific column ")
+print("3. Exit")
+ch5 = int(input("Enter choice"))
+if ch5==1:
+print("Not Allowed")
+elif ch5==2:
+a = input("Enter column name which needs to be deleted")
+company.drop([a],axis=1,inplace=False)
+elif ch5==3:
+break
+elif ch==6:
+while(True): print("Search Menu")
+print("1. Search for details of a specific product")
+print("2. Details of a specific column ")
+print("3. Exit")
+ch6 = int(input("Enter choice"))
+if ch6==1:
+st=input("Enter the name of the ORIGIN whose details you want to see.")
+print(company.loc[company['ORIGIN'] == st])
+elif ch6==2:
+col = input("Enter the name of column you want to see")
+print(company[col])
+elif ch6==3:
+break
+elif ch==7:
+while(True): print("Data Visualization Menu")
+print("1. Line plot")
+print("2. Vertical Bar Graph ")
+print("3. Horizontal bar graph")
+print("4. Exit")
+ch7 = int(input("Enter choice"))
+if ch7==1:
+x = company['PRONAME']
+y = company['PRICE']
+plt.plot(x,y)
+plt.show()
+elif ch7==2:
+x = company['PRONAME']
+y = company['PRICE']
+plt.bar(x,y)
+plt.show()
+elif ch7==3:
+x = company['PRONAME']
+y = company['PRICE']
+plt.barh(x,y)
+plt.show()
+elif ch7==4:
+break
